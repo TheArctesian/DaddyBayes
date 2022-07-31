@@ -90,6 +90,12 @@ def classifer(text):
     ng = checkNeg(td)
     nu = checkNeu(td)
     ps = checkPos(td)
+    if ng > nu and ng > ps:
+        return -1
+    if nu > ng and nu > ps:
+        return 0
+    if ps > nu and ps > ng:
+        return 1
     print(f'Neg: {ng}, Neu: {nu}, Pos: {ps}') 
 
 
@@ -127,6 +133,8 @@ def checkNeu(dic):
             p = dic[i]+Neu[i]
             print(f'{c.col.CYAN}{p}{c.col.ENDC}')
             prob.append(p)
+        else: 
+            prob.append(1)
     temp = []
     
     for i in prob: 
@@ -171,7 +179,7 @@ if __name__ == "__main__":
     test =tokenize(test)
     test1 = "bitcoin pump slump"
     train(c.lemma, c.trained)
-    classifer(test1)
+    print(classifer(test1))
 
 
 
