@@ -46,7 +46,6 @@ def setup(dictCount):
 
 def train(x_train,y_test): # Input,Output
     for i in range(len(x_train)):  
-
         temp = tokenize(x_train[i])
         if y_test[i] == "-1":
             for value in temp:
@@ -165,23 +164,22 @@ def checkPos(dic):
         return math.prod(temp)
     return x
 
-
-
+def test():
+    test1 = "bitcoin pump slump"
+    print(classifer(test1))
 
 
 if __name__ == "__main__":
     c.importCSV("../../tests/lemma.csv")
     c.printHeaders()
+    c.addCol('naiveB')
     Neg = dict()
     Neu = dict()
     Pos = dict()
-    test = "pee pee poo poo in my bum bum"
-    test =tokenize(test)
-    test1 = "bitcoin pump slump"
     train(c.lemma, c.trained)
-    print(classifer(test1))
-
-
+    for i in range(len(c.lemma)):
+        v = classifer(c.lemma[i])
+        c.naiveB.append(v)
+    c.writeCSV("s.csv")
 
     
-    # train(c.lemma, c.trained)
