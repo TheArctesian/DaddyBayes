@@ -3,6 +3,8 @@ I'm going to do this string by string.
 
 for training 
 
+
+
 tokenize string add it to a dictionary with that graded thing
 
 Word,Senti
@@ -16,9 +18,8 @@ x = thisdict.keys()
 
 nive bayes = oc of word / all words in trained cats
 """
-from lib2to3.pgen2 import token
-from this import d
 from coalas import csvReader as c
+import math
 import re
 
 def clean(text):
@@ -85,6 +86,7 @@ def concatenate(array):
 def classifer(text):
     temp = tokenize(text)
     td = concatenate(temp)
+    print(td)
     ng = checkNeg(td)
     nu = checkNeu(td)
     ps = checkPos(td)
@@ -94,46 +96,66 @@ def classifer(text):
 def getTotal(dic):
     temp = 0
     for i in dic:
-        temp += dic.values()
+        temp += dic[i]
+    print(f'{c.col.BLUE}{temp}{c.col.ENDC}')
+    return temp
 
 def checkNeg(dic):
     prob = []
     total = getTotal(dic) + getTotal(Neg)
     for i in dic:
         if i in Neg:
-            p = dic[i].values()+Neg[i].values()
+            p = dic[i]+Neg[i]
             prob.append(p)
         else: 
             prob.append(1)
-    x = 1
+    temp = []
     for i in prob: 
-        x = x*i/total
+        x = i/total
+        print(f'{c.col.FAIL}{x}{c.col.ENDC}')
+        temp.append(x)
 
+    if len(temp) == 1:
+        return(temp[0])
+    else: 
+        return math.prod(temp)
 def checkNeu(dic):
     prob = []
     total = getTotal(dic) + getTotal(Neu)
     for i in dic:
         if i in Neu:
-            p = dic[i].values()+Neu[i].values()
+            p = dic[i]+Neu[i]
+            print(f'{c.col.CYAN}{p}{c.col.ENDC}')
             prob.append(p)
-        else: 
-            prob.append(1)
-    x = 1
+    temp = []
+    
     for i in prob: 
-        x = x*i/total
+        x = i/total
+        temp.append(x)
+    if len(temp) == 1:
+        return(temp[0])
+    else: 
+        return math.prod(temp)
+    return x
 
 def checkPos(dic):
     prob = []
     total = getTotal(dic) + getTotal(Pos)
     for i in dic:
         if i in Pos:
-            p = dic[i].values()+Pos[i].values()
+            p = dic[i]+Pos[i]
             prob.append(p)
         else: 
             prob.append(1)
-    x = 1
+    temp = []
     for i in prob: 
-        x = x*i/total
+        x = i/total
+        temp.append(x)
+    if len(temp) == 1:
+        return(temp[0])
+    else: 
+        return math.prod(temp)
+    return x
 
 
 
