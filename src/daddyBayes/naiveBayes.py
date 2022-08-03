@@ -189,4 +189,6 @@ if __name__ == "__main__":
     checkAc(c.trained,c.naiveB)
     c.writeCSV("s.csv")
 
-    
+    import pandas as pd
+    df = pd.read_csv("../../../../School/EE/Algos/Qual/bayes/out.csv")
+    print(df.head)
