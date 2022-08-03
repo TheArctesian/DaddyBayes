@@ -191,4 +191,30 @@ if __name__ == "__main__":
 
     import pandas as pd
     df = pd.read_csv("../../../../School/EE/Algos/Qual/bayes/out.csv")
-    print(df.head)
+    print([col for col in df])
+    # lemma is iloc[2]
+    da = []
+    for i in df['Lemma']:
+        print(i)
+        da.append(i)
+    time = []
+    for i in df['date']:
+        time.append(i)
+    price = []
+    for i in df['price']:
+        price.append(i)
+    o = []
+    for i in range(len(da)):
+        cl = classifer(i)
+        print(cl)
+        o.append(cl)
+
+
+    with open('test.csv', "w") as file: 
+        file.write('date,price,headline,action')
+        for i in range(len(da)):
+            print("WRITING")
+            file.write(f'{time[i]},{price[i]},{da[i]},{o[i]}\n')
+
+
+    
