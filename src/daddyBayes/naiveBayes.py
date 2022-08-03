@@ -85,24 +85,22 @@ def concatenate(array):
 def classifer(text):
     temp = tokenize(text)
     td = concatenate(temp)
-    print(td)
     ng = checkNeg(td)
     nu = checkNeu(td)
     ps = checkPos(td)
+    print(f'Neg: {ng}, Neu: {nu}, Pos: {ps}') 
     if ng > nu and ng > ps:
         return -1
     if nu > ng and nu > ps:
         return 0
     if ps > nu and ps > ng:
         return 1
-    print(f'Neg: {ng}, Neu: {nu}, Pos: {ps}') 
 
 
 def getTotal(dic):
     temp = 0
     for i in dic:
         temp += dic[i]
-    print(f'{c.col.BLUE}{temp}{c.col.ENDC}')
     return temp
 
 def checkNeg(dic):
@@ -117,9 +115,7 @@ def checkNeg(dic):
     temp = []
     for i in prob: 
         x = i/total
-        print(f'{c.col.FAIL}{x}{c.col.ENDC}')
         temp.append(x)
-
     if len(temp) == 1:
         return(temp[0])
     else: 
@@ -130,7 +126,6 @@ def checkNeu(dic):
     for i in dic:
         if i in Neu:
             p = dic[i]+Neu[i]
-            print(f'{c.col.CYAN}{p}{c.col.ENDC}')
             prob.append(p)
         else: 
             prob.append(1)
@@ -143,7 +138,6 @@ def checkNeu(dic):
         return(temp[0])
     else: 
         return math.prod(temp)
-    return x
 
 def checkPos(dic):
     prob = []
@@ -162,13 +156,25 @@ def checkPos(dic):
         return(temp[0])
     else: 
         return math.prod(temp)
-    return x
 
 def test():
     test1 = "bitcoin pump slump"
     print(classifer(test1))
 
+def checkAc(train, perdicted):
+    leng = len(train) 
+    total = 0
+    for i in range(leng):
+        print(f'{i}: train{train[i]}, pred{perdicted[i]}')
+        if int(train[i]) == int(perdicted[i]):
+            print("foo")
+            total += 1
+    per = total/leng 
+    print('\n\n\n\n\ s')
+    print(per)
+    return per
 
+    return per
 if __name__ == "__main__":
     c.importCSV("../../tests/lemma.csv")
     c.printHeaders()
@@ -180,6 +186,7 @@ if __name__ == "__main__":
     for i in range(len(c.lemma)):
         v = classifer(c.lemma[i])
         c.naiveB.append(v)
+    checkAc(c.trained,c.naiveB)
     c.writeCSV("s.csv")
 
     
