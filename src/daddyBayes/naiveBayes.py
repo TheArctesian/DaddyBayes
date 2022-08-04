@@ -205,7 +205,7 @@ if __name__ == "__main__":
         price.append(i)
     o = []
     for i in range(len(da)):
-        cl = classifer(i)
+        cl = classifer(da[i])
         print(cl)
         o.append(cl)
 
