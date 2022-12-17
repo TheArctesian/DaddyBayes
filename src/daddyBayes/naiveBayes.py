@@ -1,27 +1,12 @@
-"""
-I'm going to do this string by string. 
-
-for training 
-
-
-
-tokenize string add it to a dictionary with that graded thing
-
-Word,Senti
-"bitcoin sell spree",-1 >= set1 = { "bitcoin": 1,
-                                      "sell" : 1,
-                                      "spree" : 1
-                                    }
-thisdict.update({"year": 2020}) 
-thisdict["year"] = 2018
-x = thisdict.keys() 
-
-nive bayes = oc of word / all words in trained cats
-"""
-from coalas import csvReader as c
+from coalas import csvReader as c # This is the csv parser I made but its pretty shit 
 import math
 import re
 
+
+"""
+This code is pretty much just specilised for 3 variable projects
+I will adapt this to be multi var
+"""
 def clean(text):
     text = str(text)
     text = re.sub('[^A-Za-z]+', ' ', text).lower().strip()
@@ -170,11 +155,13 @@ def checkAc(train, perdicted):
             print("foo")
             total += 1
     per = total/leng 
-    print('\n\n\n\n\ s')
-    print(per)
     return per
 
     return per
+
+def dictionaryComprehension(keys, values, dicitonary):
+    dicitonary = { k:v for (k,v) in zip(keys, values)}
+
 if __name__ == "__main__":
     c.importCSV("../../tests/lemma.csv")
     c.printHeaders()
